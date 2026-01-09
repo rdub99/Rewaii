@@ -5,10 +5,11 @@
   <title>Rewaii</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-  
+
   <link rel="icon" href="/rewaiifavicon.ico" sizes="any">
 
   <style>
+    html { scroll-behavior: smooth; }
     body {
       font-family: system-ui, -apple-system, sans-serif;
       padding: 40px;
@@ -18,13 +19,15 @@
 
     h1 { color: #333; }
 
-    /* Site header: centered brand */
+    /* Site header: brand + nav */
     .site-header {
       display:flex;
       align-items:center;
-      justify-content:center;
+      justify-content:space-between;
+      padding: 0 36px;
       height:120px;
       background: linear-gradient(135deg, #06D6A0 0%, #118AB2 100%);
+      border-radius:30px;
       color:#fff;
       box-shadow: 0 6px 18px rgba(15, 23, 42, 0.2);
     }
@@ -32,17 +35,33 @@
       margin:0;
       color: #fff;
       font-family: 'Pacifico', cursive;
-      font-size:48px;
+      font-size:80px;
       letter-spacing:0.6px;
       text-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
+
+    .site-nav {
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+    .nav-btn {
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      padding:8px 12px;
+      border-radius:8px;
+      text-decoration:none;
+      font-weight:600;
+      border:1px solid rgba(255,255,255,0.12);
+    }
+    .nav-btn:hover { background: rgba(255,255,255,0.18); }
 
     /* Promo card */
     .promo {
       max-width:980px;
       margin:24px auto;
       background: #fff;
-      border-radius:14px;
+      border-radius:30px;
       padding:20px;
       display:flex;
       gap:20px;
@@ -52,7 +71,7 @@
     .promo-visual {
       width:160px;
       height:160px;
-      border-radius:28px;
+      border-radius:30px;
       background: transparent;
       box-shadow: 0 10px 30px rgba(2,6,23,0.0), inset 0 -20px 40px rgba(255,255,255,0.00);
       display:flex;
@@ -163,18 +182,54 @@
       .app-icon { width:36%; max-height:86%; border-radius:14px; }
       .promo-title { font-size:22px; }
     }
+    /* About section */
+    .about-section {
+      max-width:980px;
+      margin:24px auto;
+      background transparent;
+      border-radius:20px;
+      padding:24px;
+      display:flex;
+      gap:20px;
+      align-items:center;
+    }
+    .about-image {
+      width:400px;
+      height:400px;
+      /*flex:0 0 200px;*/
+      border-radius:16px;
+      overflow:hidden;
+      background:#e2e8f0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .about-image img { width:100%; height:100%; object-fit:cover; display:block; }
+    .about-text { flex:1; color:#0f172a; }
+    .about-text h3 { margin:0 0 8px 0; font-size:22px; }
+    .about-text p { margin:0; color:#475569; line-height:1.5; }
+
+    @media (max-width:880px) {
+      .about-section { flex-direction:column; }
+      .about-image { width:100%; height:220px; flex:none; border-radius:12px; }
+    }
   </style>
 </head>
 <body>
 
   <header class="site-header" role="banner" aria-label="Rewaii">
     <h1>Rewaii</h1>
+    <nav class="site-nav" aria-label="Primary">
+      <a class="nav-btn" href="#tic-tac-toe">Tic Tac Toe</a>
+      <a class="nav-btn" href="#ballpit">Ballpit Drop</a>
+      <a class="nav-btn" href="#pane-on-a-plane">Pane on a Plane</a>
+    </nav>
   </header>
 
   <main style="padding:24px;">
 
     <!-- Tic Tac Toe Two -->
-    <section class="promo" aria-labelledby="promo-title">
+    <section id="tic-tac-toe" class="promo" aria-labelledby="promo-tic-tac-toe">
       <div class="promo-visual" aria-hidden="false">
         <a href="https://apps.apple.com/app/id6450284641" target="_blank" rel="noopener noreferrer" aria-label="Open on the App Store" style="--app-icon-mask: url('data:image/svg+xml,%0A%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xml%3Aspace%3D%22preserve%22%20viewBox%3D%220%200%20230.5%20230.5%22%3E%0A%20%20%3Cpath%20fill-rule%3D%22evenodd%22%20stroke-linejoin%3D%22round%22%20stroke-miterlimit%3D%221.4%22%20clip-rule%3D%22evenodd%22%20d%3D%22M158.2%20230H64.1a320%20320%200%200%201-7-.1c-5%200-10-.5-15-1.3a50.8%2050.8%200%200%201-14.4-4.8%2048.2%2048.2%200%200%201-21-21%2050.9%2050.9%200%200%201-4.8-14.4%20100.7%20100.7%200%200%201-1.3-15v-7l-.1-8.2V64.1a320%20320%200%200%201%20.1-7c0-5%20.5-10%201.3-15a50.7%2050.7%200%200%201%204.8-14.4%2048.2%2048.2%200%200%201%2021-21%2051%2051%200%200%201%2014.4-4.8c5-.8%2010-1.2%2015-1.3a320%20320%200%200%201%207%200l8.2-.1h94.1a320%20320%200%200%201%207%20.1c5%200%2010%20.5%2015%201.3a52%2052%200%200%201%2014.4%204.8%2048.2%2048.2%200%200%201%2021%2021%2050.9%2050.9%200%200%201%204.8%2014.4c.8%205%201.2%2010%201.3%2015a320%20320%200%200%201%20.1%207v102.3l-.1%207c0%205-.5%2010-1.3%2015a50.7%2050.7%200%200%201-4.8%2014.4%2048.2%2048.2%200%200%201-21%2021%2050.8%2050.8%200%200%201-14.4%204.8c-5%20.8-10%201.2-15%201.3a320%20320%200%200%201-7%200l-8.2.1z%22%2F%3E%0A%3C%2Fsvg%3E');">
           <img
@@ -187,7 +242,7 @@
       </div>
 
       <div class="promo-body">
-        <h2 id="promo-title" class="promo-title">Tic Tac Toe Two <span class="meta">Never Ends in a Tie</span></h2>
+        <h2 id="promo-tic-tac-toe" class="promo-title">Tic Tac Toe Two <span class="meta">Never Ends in a Tie</span></h2>
         <p class="promo-sub">The sequel to tic tac toe that you've been waiting for.</p>
 
         <div class="promo-features" aria-hidden="true">
@@ -205,7 +260,7 @@
 
 
     <!-- Ballpit Drop -->
-    <section class="promo" aria-labelledby="promo-title">
+    <section id="ballpit" class="promo" aria-labelledby="promo-ballpit">
       <div class="promo-visual" aria-hidden="false">
         <a href="https://apps.apple.com/us/app/ballpit-drop/id6499107924" target="_blank" rel="noopener noreferrer" aria-label="Open on the App Store" style="--app-icon-mask: url('data:image/svg+xml,%0A%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xml%3Aspace%3D%22preserve%22%20viewBox%3D%220%200%20230.5%20230.5%22%3E%0A%20%20%3Cpath%20fill-rule%3D%22evenodd%22%20stroke-linejoin%3D%22round%22%20stroke-miterlimit%3D%221.4%22%20clip-rule%3D%22evenodd%22%20d%3D%22M158.2%20230H64.1a320%20320%200%200%201-7-.1c-5%200-10-.5-15-1.3a50.8%2050.8%200%200%201-14.4-4.8%2048.2%2048.2%200%200%201-21-21%2050.9%2050.9%200%200%201-4.8-14.4%20100.7%20100.7%200%200%201-1.3-15v-7l-.1-8.2V64.1a320%20320%200%200%201%20.1-7c0-5%20.5-10%201.3-15a50.7%2050.7%200%200%201%204.8-14.4%2048.2%2048.2%200%200%201%2021-21%2051%2051%200%200%201%2014.4-4.8c5-.8%2010-1.2%2015-1.3a320%20320%200%200%201%207%200l8.2-.1h94.1a320%20320%200%200%201%207%20.1c5%200%2010%20.5%2015%201.3a52%2052%200%200%201%2014.4%204.8%2048.2%2048.2%200%200%201%2021%2021%2050.9%2050.9%200%200%201%204.8%2014.4c.8%205%201.2%2010%201.3%2015a320%20320%200%200%201%20.1%207v102.3l-.1%207c0%205-.5%2010-1.3%2015a50.7%2050.7%200%200%201-4.8%2014.4%2048.2%2048.2%200%200%201-21%2021%2050.8%2050.8%200%200%201-14.4%204.8c-5%20.8-10%201.2-15%201.3a320%20320%200%200%201-7%200l-8.2.1z%22%2F%3E%0A%3C%2Fsvg%3E%0A');">
           <img
@@ -218,7 +273,7 @@
       </div>
 
       <div class="promo-body">
-        <h2 id="promo-title" class="promo-title">Ballpit Drop <span class="meta">Relaxing Game</span></h2>
+        <h2 id="promo-ballpit" class="promo-title">Ballpit Drop <span class="meta">Relaxing Game</span></h2>
         <p class="promo-sub">Merge balls to create larger ones in a totally radical game!</p>
 
         <div class="promo-features" aria-hidden="true">
@@ -235,7 +290,7 @@
     </section>
 
     <!-- Pane on a Plane -->
-    <section class="promo" aria-labelledby="promo-title">
+    <section id="pane-on-a-plane" class="promo" aria-labelledby="promo-pane-on-a-plane">
       <div class="promo-visual" aria-hidden="false">
         <a href="https://apps.apple.com/app/id6450284641" target="_blank" rel="noopener noreferrer" aria-label="Open on the App Store" style="--app-icon-mask: url('data:image/svg+xml,%0A%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xml%3Aspace%3D%22preserve%22%20viewBox%3D%220%200%20230.5%20230.5%22%3E%0A%20%20%3Cpath%20fill-rule%3D%22evenodd%22%20stroke-linejoin%3D%22round%22%20stroke-miterlimit%3D%221.4%22%20clip-rule%3D%22evenodd%22%20d%3D%22M158.2%20230H64.1a320%20320%200%200%201-7-.1c-5%200-10-.5-15-1.3a50.8%2050.8%200%200%201-14.4-4.8%2048.2%2048.2%200%200%201-21-21%2050.9%2050.9%200%200%201-4.8-14.4%20100.7%20100.7%200%200%201-1.3-15v-7l-.1-8.2V64.1a320%20320%200%200%201%20.1-7c0-5%20.5-10%201.3-15a50.7%2050.7%200%200%201%204.8-14.4%2048.2%2048.2%200%200%201%2021-21%2051%2051%200%200%201%2014.4-4.8c5-.8%2010-1.2%2015-1.3a320%20320%200%200%201%207%200l8.2-.1h94.1a320%20320%200%200%201%207%20.1c5%200%2010%20.5%2015%201.3a52%2052%200%200%201%2014.4%204.8%2048.2%2048.2%200%200%201%2021%2021%2050.9%2050.9%200%200%201%204.8%2014.4c.8%205%201.2%2010%201.3%2015a320%20320%200%200%201%20.1%207v102.3l-.1%207c0%205-.5%2010-1.3%2015a50.7%2050.7%200%200%201-4.8%2014.4%2048.2%2048.2%200%200%201-21%2021%2050.8%2050.8%200%200%201-14.4%204.8c-5%20.8-10%201.2-15%201.3a320%20320%200%200%201-7%200l-8.2.1z%22%2F%3E%0A%3C%2Fsvg%3E%0A');">
   
@@ -249,7 +304,7 @@
       </div>
 
       <div class="promo-body">
-        <h2 id="promo-title" class="promo-title">Pane on a Plane <span class="meta">Just Plane Fun</span></h2>
+        <h2 id="promo-pane-on-a-plane" class="promo-title">Pane on a Plane <span class="meta">Just Plane Fun</span></h2>
         <p class="promo-sub">Can you get the high score in this relaxing puzzle game?</p>
 
         <div class="promo-features" aria-hidden="true">
@@ -262,6 +317,17 @@
           <a class="btn-primary" href="https://apps.apple.com/app/id6757115578" target="_blank" rel="noopener noreferrer">Download on the App Store</a>
           <a class="btn-secondary" href="#learn-more">Learn more</a>
         </div>
+      </div>
+    </section>    
+
+    <!-- About Me -->
+    <section id="about" class="about-section" aria-labelledby="about-title">
+      <div class="about-image" aria-hidden="false">
+        <img src="rewgameslogo.png" alt="Rew Games logo" />
+      </div>
+      <div class="about-text">
+        <h3 id="about-title">About Me</h3>
+        <p>Hi there, I'm Ryan. I've made these games with love and care, and would appreciate if you'd check them out. Let me know if you have any feedback or just want to say hello at rewgamesy@gmail.com!</p>
       </div>
     </section>
 
