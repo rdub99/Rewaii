@@ -441,6 +441,12 @@
         overflow: hidden;
       }
 
+      .youtube-playlist iframe {
+        width: 100%;       /* Forces it to match your 1100px width */
+        display: block;    /* Removes the tiny gap at the bottom of the video */
+        border: none;      /* Removes any default YouTube border */
+      }
+
       /* Dark mode tweak if needed */
       @media (prefers-color-scheme: dark) {
         .platform-icon.apple {
@@ -641,8 +647,8 @@
     </section>
 
     <section class="youtube-playlist">
-      <iframe width="560" height="315" 
-        src="https://www.youtube.com/embed/videoseries?list=PLRE-UFLEgWzBuOiqemhEI9b4gmmBbutnC"
+      <iframe width="560" height="315"
+        src="https://www.youtube.com/embed/videoseries?list=PLRL3UNMAsqoDJ7rNkffu5K9yKVASRJN1P"
         frameborder="0"
         referrerPolicy="strict-origin-when-cross-origin"
         allow="autoplay; encrypted-media" 
