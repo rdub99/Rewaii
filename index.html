@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Rewaii</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
@@ -9,7 +10,7 @@
   <link rel="icon" href="/rewaiifavicon.ico" sizes="any">
 
   <style>
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; font-size:16px; }
     :root { --page-pad: 40px; --about-pad: 48px; }
     body {
       font-family: system-ui, -apple-system, sans-serif;
@@ -38,7 +39,7 @@
       margin:0;
       color: #fff;
       font-family: 'Pacifico', cursive;
-      font-size:80px;
+      font-size: clamp(36px, 8vw, 80px);
       letter-spacing:0.6px;
       text-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
@@ -120,7 +121,7 @@
       min-width:0;
     }
     .promo-title {
-      font-size:28px;
+      font-size: clamp(20px, 5.5vw, 28px);
       margin:0 0 8px 0;
       color:#0f172a;
       display:flex;
@@ -226,6 +227,15 @@
     @media (max-width:880px) {
       .about-section { flex-direction:column; }
       .about-image { width:100%; height:220px; flex:none; border-radius:12px; }
+    }
+
+    @media (max-width:420px) {
+      /* slightly larger base type on small phones for readability */
+      html { font-size:18px; }
+      .site-header { height:100px; padding: 0 18px; }
+      .site-header h1 { font-size: clamp(30px, 10vw, 56px); }
+      .promo-visual { height:200px; }
+      .promo-title { gap:8px; }
     }
   </style>
 </head>
@@ -342,7 +352,7 @@
         </div>
         <div class="about-text">
           <h3 id="about-title">About Me</h3>
-          <p>Hi there, I'm Ryan. I started making games back in 2022 without any prior knowledge of how to do it and before AI could do the job for you, and I hope you can feel the personal passion put into each game. My first published game was Tic Tac Toe Two in 2023, which is a corny idea I had one day. My next game, Ballpit Drop, is inspired by relaxing games I played during stressful times. And my most recent, Pane on a Plane, is actually my very first idea from back when I was making games in Scratch. This About Me paragraph was completely written by ChatGPT though. Let me know if you have any feedback or just want to say hello at rewgamesy@gmail.com!</p>
+          <p>Hi there, I'm Ryan. I started making games back in 2022 without any prior knowledge of how to do it and before AI could do the job for you, and I hope you can feel the personal passion put into each game. This About Me paragraph was completely written by ChatGPT though. Let me know if you have any feedback or just want to say hello at rewgamesy@gmail.com!</p>
         </div>
       </div>
     </section>
