@@ -10,7 +10,8 @@
   <link rel="icon" href="/rewaiifavicon.ico" sizes="any">
 
   <style>
-    html { scroll-behavior: smooth; font-size:16px; }
+    html { scroll-behavior: smooth; font-size:16px; box-sizing: border-box; }
+    *, *::before, *::after { box-sizing: inherit; }
     :root { --page-pad: 40px; --about-pad: 48px; }
     body {
       font-family: system-ui, -apple-system, sans-serif;
@@ -186,13 +187,13 @@
     
     .about-outer {
       position: relative;
-      left: 50%;
-      margin-left: -50vw;
-      margin-right: -50vw;
-      width: 100vw;
+      width: calc(100% + 2 * var(--page-pad));
+      margin-left: calc(-1 * var(--page-pad));
+      margin-right: calc(-1 * var(--page-pad));
       background: linear-gradient(90deg, #ff4d4d 0%, #ff8c42 100%);
       padding: var(--about-pad) 0;
       box-sizing: border-box;
+      overflow: hidden;
     }
     .about-section {
       max-width:980px;
@@ -232,6 +233,7 @@
     @media (max-width:420px) {
       /* slightly larger base type on small phones for readability */
       html { font-size:18px; }
+      body { padding: 16px; }
       .site-header { height:100px; padding: 0 18px; }
       .site-header h1 { font-size: clamp(30px, 10vw, 56px); }
       .promo-visual { height:200px; }
