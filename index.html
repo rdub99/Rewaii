@@ -7,7 +7,7 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 
-  <link rel="icon" href="/rewaiifavicon.ico" sizes="any">
+  <link rel="icon" href="/rfavicon.ico" sizes="any">
 
   <style>
     html { scroll-behavior: smooth; font-size:16px; box-sizing: border-box; }
@@ -50,6 +50,10 @@
       gap:12px;
       align-items:center;
     }
+
+    /* Hide hamburger by default on larger viewports */
+    .nav-toggle { display: none; }
+
     .nav-btn {
       background: rgba(255,255,255,0.12);
       color: #fff;
@@ -65,27 +69,29 @@
       max-width:780px;
       margin:24px auto;
       background: #fff;
-      border-radius:30px;
+      border-radius:60px;
       padding:20px;
       display:flex;
       gap:20px;
       align-items:center;
       box-shadow: 0 8px 30px rgba(10, 20, 40, 0.2);
     }
-    .promo-visual {
-      width:160px;
-      height:160px;
-      border-radius:30px;
-      background: transparent;
-      box-shadow: 0 10px 30px rgba(2,6,23,0.0), inset 0 -20px 40px rgba(255,255,255,0.00);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color:#fff;
-      font-weight:700;
-      font-size:14px;
-      text-align:center;
-      padding:18px;
+
+    .promo-visual{
+      width: min(160px, 100%);
+      aspect-ratio: 1 / 1 !important;
+      height: auto !important;
+
+      position: relative !important;
+      overflow: hidden !important;
+
+      padding: 0 !important;
+      border: 0 !important;
+      box-sizing: border-box !important;
+
+      display: block !important;   
+      line-height: 0 !important;   
+      font-size: 0 !important;     
     }
 
     .app-icon {
@@ -98,14 +104,11 @@
       background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.02));
     }
 
-    .promo-visual { position:relative; overflow:hidden; }
-
     .promo-visual a {
       display:block;
       width:100%;
       height:100%;
       overflow:hidden;
-      /* use the inline --app-icon-mask you already set on the <a> */
       mask-image: var(--app-icon-mask);
       -webkit-mask-image: var(--app-icon-mask);
       mask-repeat: no-repeat;
@@ -162,7 +165,22 @@
       text-decoration:none;
       font-weight:600;
       box-shadow: 0 6px 18px rgba(6, 95, 70, 0.12);
+      transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
+      will-change: transform, box-shadow;
+      -webkit-tap-highlight-color: transparent;
     }
+    .btn-primary:hover,
+    .btn-primary:focus-visible {
+      transform: translateY(-3px);
+      filter: brightness(0.96);
+      box-shadow: 0 10px 28px rgba(6, 95, 70, 0.16);
+    }
+    .btn-primary:active {
+      transform: translateY(0) scale(0.995);
+      filter: brightness(0.92);
+      box-shadow: 0 6px 18px rgba(6, 95, 70, 0.12);
+    }
+    .btn-primary:focus-visible { outline: 3px solid rgba(6,95,70,0.18); outline-offset: 3px; }
     .btn-secondary {
       background:transparent;
       color:#0f172a;
@@ -179,9 +197,10 @@
     }
 
     @media (max-width:880px) {
-      .promo { flex-direction:column; align-items:stretch; padding:18px; }
-      .promo-visual { width:100%; height:260px; border-radius:16px; min-width:0; }
-      .app-icon { width:36%; max-height:86%; border-radius:14px; }
+      .promo { flex-direction:column; align-items:stretch; border-radius:75px; padding:18px; padding-bottom: 30px;}
+      .promo-visual { width:100%; aspect-ratio: auto; height:auto; border-radius:0px; min-width:0; display:block; overflow:hidden; position:relative; }
+      .promo-visual a { position:absolute; inset:0; width:100%; height:100%; display:block; }
+      .app-icon { width:100%; height:80%; border-radius: inherit; }
       .promo-title { font-size:22px; }
     }
     
@@ -193,6 +212,7 @@
       width: 100vw;
       background: linear-gradient(90deg, #ff4d4d 0%, #ff8c42 100%);
       padding: var(--about-pad) 0;
+      margin-top: 40px;
       box-sizing: border-box;
     }
 
@@ -217,10 +237,11 @@
     }
     .about-image {
       width:200px;
-      height:200px;
-      border-radius:16px;
+      aspect-ratio: 1 / 1;
+      height: auto;
       overflow:hidden;
-      background: transparent;
+      background: rgba(255,255,255,0.12);
+      border-radius:400px;
       display:flex;
       align-items:center;
       justify-content:center;
@@ -237,24 +258,93 @@
 
     @media (max-width:880px) {
       .about-section { flex-direction:column; }
-      .about-image { width:100%; height:220px; flex:none; border-radius:12px; }
+      .about-image { width:100%; aspect-ratio: 1 / 1; height: auto; flex:none; border-radius: inherit; }
     }
 
     @media (max-width:420px) {
       /* slightly larger base type on small phones for readability */
+      :root { --page-pad: 16px; }
       html { font-size:18px; }
       body { padding: 16px; }
       .site-header { height:100px; padding: 0 18px; }
       .site-header h1 { font-size: clamp(30px, 10vw, 56px); }
-      .promo-visual { height:200px; }
+      .promo-visual { height:300px; }
       .promo-title { gap:8px; }
+
+      /* full-bleed about band for small phones including iPhone safe-area */
+      .about-outer {
+        left: 50%;
+        margin-left: calc(-50vw - env(safe-area-inset-left, 0px));
+        width: calc(100vw + env(safe-area-inset-left, 0px) + env(safe-area-inset-right, 0px));
+        /* keep horizontal inner spacing for content */
+        padding-left: var(--page-pad);
+        padding-right: var(--page-pad);
+        margin-top: 40px;
+      }
+
+      /* Make about section taller and adjust image for more text space */
+      .about-section {
+        padding: 20px var(--page-pad) calc(56px + 100px); /* slightly increased top padding */
+        align-items: flex-start;
+        gap: 12px;
+        min-height: 420px; /* ensure section is long enough to avoid clipping */
+      }
+      .about-image {
+        width:100%;
+        aspect-ratio: 1 / 1;
+        height: auto;
+        border-radius: inherit; /* follow .about-section radius */
+        flex:none;
+      }
+      .about-text p {
+        font-size: 16px;
+        line-height: 1.6;
+      }
     }
 
+    /* Mobile navigation (hamburger) */
     @media (max-width:600px) {
-      /* Hide header nav on narrow mobile devices to avoid crowding */
-      .site-nav { display: none !important; }
-      /* Center the title when nav is hidden */
-      .site-header { justify-content: center; }
+      .site-header { justify-content: center; position: relative; }
+
+      /* Hide nav by default, show when .open is added */
+      .site-nav {
+        display: none;
+        position: absolute;
+        top: calc(100% + 8px);
+        right: 16px;
+        background: #fff;
+        color: #0f172a;
+        flex-direction: column;
+        gap: 8px;
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 0 8px 20px rgba(2,6,23,0.12);
+        min-width: 180px;
+        z-index: 40;
+        align-items: flex-start; /* left align items */
+      }
+      .site-nav a { color: inherit; display:block; width:100%; text-align:left; }
+      .site-nav.open { display: flex; }
+
+      /* hamburger button */
+      .nav-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        right: 18px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: transparent;
+        border: none;
+        color: #fff;
+        font-size: 20px;
+        width: 44px;
+        height: 44px;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+      .nav-toggle:focus { outline: 2px solid #fff; outline-offset: 2px; }
     }
   </style>
 </head>
@@ -262,7 +352,10 @@
 
   <header class="site-header" role="banner" aria-label="Rewaii">
     <h1>Rewaii</h1>
-    <nav class="site-nav" aria-label="Primary">
+    <button class="nav-toggle" aria-controls="primary-nav" aria-expanded="false" aria-label="Open navigation">
+      <svg aria-hidden="true" width="20" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 1h20M0 7h20M0 13h20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <nav id="primary-nav" class="site-nav" aria-label="Primary">
       <a class="nav-btn" href="#tic-tac-toe">Tic Tac Toe</a>
       <a class="nav-btn" href="#ballpit">Ballpit Drop</a>
       <a class="nav-btn" href="#pane-on-a-plane">Pane on a Plane</a>
@@ -296,7 +389,8 @@
 
         <div class="promo-actions">
           <a class="btn-primary" href="https://apps.apple.com/app/id6450284641" target="_blank" rel="noopener noreferrer">Download on the App Store</a>
-          <a class="btn-secondary" href="#learn-more">Learn more</a>
+          <a class="btn-secondary" href="#about">About</a>
+          <a class="btn-secondary" href="#about">Privacy</a>
         </div>
       </div>
     </section>
@@ -327,7 +421,8 @@
 
         <div class="promo-actions">
           <a class="btn-primary" href="https://apps.apple.com/us/app/ballpit-drop/id6499107924" target="_blank" rel="noopener noreferrer">Download on the App Store</a>
-          <a class="btn-secondary" href="#learn-more">Learn more</a>
+          <a class="btn-secondary" href="#about">About</a>
+          <a class="btn-secondary" href="#about">Privacy</a>
         </div>
       </div>
     </section>
@@ -358,7 +453,8 @@
 
         <div class="promo-actions">
           <a class="btn-primary" href="https://apps.apple.com/app/id6757115578" target="_blank" rel="noopener noreferrer">Download on the App Store</a>
-          <a class="btn-secondary" href="#learn-more">Learn more</a>
+          <a class="btn-secondary" href="#about">About</a>
+          <a class="btn-secondary" href="#about">Privacy</a>
         </div>
       </div>
     </section>    
@@ -377,6 +473,48 @@
     </section>
 
   </main>
+
+  <script>
+    (function(){
+      const btn = document.querySelector('.nav-toggle');
+      const nav = document.getElementById('primary-nav');
+      if(!btn || !nav) return;
+
+      btn.addEventListener('click', function(e){
+        e.stopPropagation();
+        const open = nav.classList.toggle('open');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        btn.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+      });
+
+      // close when clicking a link
+      nav.addEventListener('click', function(e){
+        if(e.target.tagName.toLowerCase() === 'a'){
+          nav.classList.remove('open');
+          btn.setAttribute('aria-expanded', 'false');
+          btn.setAttribute('aria-label', 'Open navigation');
+        }
+      });
+
+      // close on ESC
+      document.addEventListener('keydown', function(e){
+        if(e.key === 'Escape'){
+          nav.classList.remove('open');
+          btn.setAttribute('aria-expanded','false');
+          btn.setAttribute('aria-label','Open navigation');
+        }
+      });
+
+      // close on outside click
+      document.addEventListener('click', function(e){
+        if(!nav.contains(e.target) && !btn.contains(e.target)){
+          nav.classList.remove('open');
+          btn.setAttribute('aria-expanded','false');
+          btn.setAttribute('aria-label','Open navigation');
+        }
+      });
+    })();
+  </script>
 
 </body>
 </html>
